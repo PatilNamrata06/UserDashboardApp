@@ -1,0 +1,36 @@
+﻿@model UserDashboardApp.Models.UserModel
+
+@using (Html.BeginForm("Create", "User", FormMethod.Post,
+       new { enctype = "multipart/form-data", id = "userForm" }))
+{
+    <div class="row g-3">
+        <div class="col-md-6">
+            <label class="form-label">Username</label>
+            @Html.TextBoxFor(m => m.Username, new { @class = "form-control", required = "required" })
+        </div>
+
+        <div class="col-md-6">
+            <label class="form-label">Email</label>
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", required = "required" })
+        </div>
+
+        <div class="col-md-6">
+            <label class="form-label">Mobile</label>
+            @Html.TextBoxFor(m => m.Mobile, new { @class = "form-control", required = "required" })
+        </div>
+
+        <div class="col-md-6">
+            <label class="form-label">Country</label>
+            @Html.TextBoxFor(m => m.Country, new { @class = "form-control", required = "required" })
+        </div>
+
+        <div class="col-12">
+            <label class="form-label">Image</label>
+            <input type="file" name="image" class="form-control" />
+        </div>
+
+        <div class="col-12 text-end">
+            <button type="submit" class="btn btn-success">Save</button>
+        </div>
+    </div>
+}

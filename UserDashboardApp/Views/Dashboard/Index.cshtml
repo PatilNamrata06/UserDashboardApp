@@ -1,0 +1,86 @@
+﻿@model IEnumerable<UserDashboardApp.Models.UserModel>
+
+<button class="btn btn-primary mb-3" id="btnCreate">Create User</button>
+
+<table class="table table-bordered table-responsive">
+    <thead>
+        <tr>
+            <th>Image</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Mobile</th>
+            <th>Country</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var u in Model)
+        {
+            <tr>
+                <td>
+                    @if (!string.IsNullOrEmpty(u.ImagePath))
+                    {
+                        <img src="@u.ImagePath" width="40" class="rounded-circle" />
+                    }
+                </td>
+                <td>@u.Username</td>
+                <td>@u.Email</td>
+                <td>@u.Mobile</td>
+                <td>@u.Country</td>
+                <td>
+                    <button class="btn btn-warning btnEdit" data-id="@u.Id">Edit</button>
+                    <button class="btn btn-danger btnDelete" data-id="@u.Id">Delete</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- MODAL -->
+<div class="modal fade" id="userModal">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content bg-white">
+            <div class="modal-body" id="modalBody"></div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $("#btnCreate").click(function () {
+            $.get("/User/Create", function (html) {
+                $("#modalBody").html(html);
+                new bootstrap.Modal("#userModal").show();
+            });
+        });
+
+        $(document).on("click", ".btnEdit", function () {
+            $.get("/User/Edit", { id: $(this).data("id") }, function (html) {
+                $("#modalBody").html(html);
+                new bootstrap.Modal("#userModal").show();
+            });
+        });
+
+        $(document).on("submit", "#userForm", function (e) {
+            e.preventDefault();
+            $.ajax({
+                url: this.action,
+                type: "POST",
+                data: new FormData(this),
+                processData: false,
+                contentType: false,
+                success: function (r) {
+                    if (r.success) location.reload();
+                }
+            });
+        });
+
+        $(document).on("click", ".btnDelete", function () {
+            if (confirm("Delete user?")) {
+                $.post("/Dashboard/Delete", { id: $(this).data("id") }, function () {
+                    location.reload();
+                });
+            }
+        });
+    </script>
+}

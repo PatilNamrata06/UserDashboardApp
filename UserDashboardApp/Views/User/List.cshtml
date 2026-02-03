@@ -1,0 +1,36 @@
+﻿@model List<UserDashboardApp.Models.UserModel>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
+
+<div class="container mt-4">
+    <h2>All Users</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Mobile</th>
+                <th>Country</th>
+                <th>Image</th>
+                <th>Created At</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var u in Model)
+            {
+                <tr>
+                    <td>@u.Username</td>
+                    <td>@u.Email</td>
+                    <td>@u.Mobile</td>
+                    <td>@u.Country</td>
+                    <td>
+                        @if (!string.IsNullOrEmpty(u.ImagePath))
+                        {
+                            <img src="@u.ImagePath" width="50" height="50" />
+                        }
+                    </td>
+                    <td>@u.CreatedAt.ToString("g")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

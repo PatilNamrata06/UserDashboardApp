@@ -1,0 +1,42 @@
+﻿@model UserDashboardApp.Models.UserModel
+
+@using (Html.BeginForm("Edit", "User", FormMethod.Post,
+       new { enctype = "multipart/form-data", id = "userForm" }))
+{
+    @Html.HiddenFor(m => m.Id)
+
+    <div class="row g-3">
+        <div class="col-md-6">
+            <label>Username</label>
+            @Html.TextBoxFor(m => m.Username, new { @class = "form-control" })
+        </div>
+
+        <div class="col-md-6">
+            <label>Email</label>
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+        </div>
+
+        <div class="col-md-6">
+            <label>Mobile</label>
+            @Html.TextBoxFor(m => m.Mobile, new { @class = "form-control" })
+        </div>
+
+        <div class="col-md-6">
+            <label>Country</label>
+            @Html.TextBoxFor(m => m.Country, new { @class = "form-control" })
+        </div>
+
+        <div class="col-12">
+            <label>Image</label>
+            <input type="file" name="image" class="form-control" />
+            @if (!string.IsNullOrEmpty(Model.ImagePath))
+            {
+                <img src="@Model.ImagePath" class="img-thumbnail mt-2" width="80" />
+            }
+        </div>
+
+        <div class="col-12 text-end">
+            <button type="submit" class="btn btn-success">Update</button>
+        </div>
+    </div>
+}
