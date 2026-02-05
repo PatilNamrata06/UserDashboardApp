@@ -5,7 +5,7 @@ This project demonstrates a CRUD application built using ASP.NET and SQL Server.
 The application supports Create, Read, Update, and Delete operations.
 
 Technologies Used:
-- ASP.NET
+- ASP.NET Web Framework
 - SQL Server
 - Entity Framework / ADO.NET
 - HTML/CSS (or Bootstrap)
@@ -17,7 +17,7 @@ Features:
 - Delete records
 
 Live Demo:
-https://yourwebsite.somee.com
+http://dashboardcrud.somee.com/
 
 Setup Instructions:
 1. Clone the repository
